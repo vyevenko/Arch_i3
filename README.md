@@ -1,1 +1,2 @@
-# Arch_i3
+# ArchI3
+ArchI3 scripts

@@ -1,0 +1,121 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+;==========================================================
+
+include-file = $HOME/.config/polybar/i3.ini
+include-file = $HOME/.config/polybar/colors.ini
+include-file = $HOME/.config/polybar/battery.ini
+include-file = $HOME/.config/polybar/keyboard.ini
+include-file = $HOME/.config/polybar/memory.ini
+include-file = $HOME/.config/polybar/swap.ini
+include-file = $HOME/.config/polybar/cpu.ini
+include-file = $HOME/.config/polybar/temperature.ini
+
+;==========================================================
+
+
+[bar/main]
+
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 30
+bottom = true
+radius = 0.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+border-top-size = 2px
+border-top-color = ${colors.cyan}
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 2
+module-margin-right = 0
+
+
+;==========================================================
+
+font-0 = "DejaVu Sans:pixelsize=13;2"
+font-1 = "Material Icons:size=13;4"
+font-2 = "Font Awesome 5 Free:pixelsize=13;2"
+font-3 = "Font Awesome 5 Free Solid:pixelsize=13;2"
+font-4 = "Font Awesome 5 Brands:pixelsize=13;2"
+
+;==========================================================
+
+
+modules-left = i3
+modules-center = date
+modules-right =  memory swap cpu battery xkeyboard powermenu
+
+;wm-restack = i3
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+label = %date% %time%
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = systemctl reboot
+
+menu-2-0 = power off
+menu-2-0-exec = systemctl poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
